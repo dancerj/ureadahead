@@ -30,3 +30,6 @@ RUN mkdir work && chown unprivileged work && \
     gosu unprivileged dpkg-buildpackage -j && \
     debi
 
+COPY --chown=unprivileged . ureadahead/
+RUN cd ureadahead/ && \
+    gosu unprivileged debuild
