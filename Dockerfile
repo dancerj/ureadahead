@@ -30,6 +30,8 @@ RUN mkdir work && chown unprivileged work && \
     gosu unprivileged dpkg-buildpackage -j && \
     debi
 
-COPY --chown=unprivileged . ureadahead/
-RUN cd ureadahead/ && \
-    gosu unprivileged debuild
+COPY --chown=unprivileged . ureadahead/ureadahead-0.100.1
+RUN cd ureadahead/ureadahead-0.100.1 && \
+    gosu unprivileged debuild --no-tgz-check -i -us -uc -b
+
+# --no-tgz-check: TODO: should get the real orig.tar.gz
